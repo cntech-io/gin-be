@@ -14,6 +14,7 @@ type Server struct {
 
 func NewServer(conf ServerConfig) *Server {
 	server := &Server{}
+	server.config = &conf
 	if conf.DebugMode {
 		gin.SetMode(gin.DebugMode)
 	} else {
