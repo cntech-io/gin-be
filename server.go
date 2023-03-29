@@ -7,13 +7,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type server struct {
+type Server struct {
 	config *ServerConfig
 	router *gin.Engine
 }
 
-func NewServer(conf ServerConfig) *server {
-	server := &server{}
+func NewServer(conf ServerConfig) *Server {
+	server := &Server{}
 	if conf.debugMode {
 		gin.SetMode(gin.DebugMode)
 	} else {
@@ -26,7 +26,7 @@ func NewServer(conf ServerConfig) *server {
 	return server
 }
 
-func (s *server) AddController(c *controller) *server {
+func (s *Server) AddController(c *controller) *Server {
 	if c.path == "" {
 		panic("controller path missing")
 	}
@@ -40,12 +40,12 @@ func (s *server) AddController(c *controller) *server {
 	return s
 }
 
-func (s *server) AttachMiddleWare(middleware gin.HandlerFunc) *server {
+func (s *Server) AttachMiddleWare(middleware gin.HandlerFunc) *Server {
 	s.router.Use((middleware))
 	return s
 }
 
-func (s *server) AttachHealth() *server {
+func (s *Server) AttachHealth() *Server {
 	group := s.router.Group("/health")
 	group.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(r.OKResponse("Healthy"))
@@ -53,7 +53,7 @@ func (s *server) AttachHealth() *server {
 	return s
 }
 
-func (s *server) Run() {
+func (s *Server) Run() {
 	if s.config.port == "" {
 		s.router.Run(":8080")
 	} else {
