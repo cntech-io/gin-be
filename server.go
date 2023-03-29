@@ -14,14 +14,14 @@ type Server struct {
 
 func NewServer(conf ServerConfig) *Server {
 	server := &Server{}
-	if conf.debugMode {
+	if conf.DebugMode {
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	server.router = gin.New()
-	server.router.SetTrustedProxies(conf.trustedProxies)
+	server.router.SetTrustedProxies(conf.TrustedProxies)
 
 	return server
 }
@@ -54,9 +54,9 @@ func (s *Server) AttachHealth() *Server {
 }
 
 func (s *Server) Run() {
-	if s.config.port == "" {
+	if s.config.Port == "" {
 		s.router.Run(":8080")
 	} else {
-		s.router.Run(s.config.port)
+		s.router.Run(s.config.Port)
 	}
 }
