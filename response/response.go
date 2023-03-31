@@ -2,19 +2,17 @@ package response
 
 import "net/http"
 
-type responseMessage string
+type responseType string
 
 const (
-	SUCCESS responseMessage = "SUCCESS"
-	FAIL    responseMessage = "FAIL"
+	InvalidParams responseType = "invalid_params"
 )
 
 type response struct {
-	Status         bool            `json:"status"`
-	Message        responseMessage `json:"message"`
-	EndUserMessage string          `json:"end_user_message"`
-	Error          string          `json:"error"`
-	Data           any             `json:"data,omitempty"`
+	Status         bool   `json:"status"`
+	EndUserMessage string `json:"end_user_message"`
+	Type           string `json:"type"`
+	Data           any    `json:"data,omitempty"`
 }
 
 func Response(endUserMessage string) *response {
@@ -25,14 +23,12 @@ func Response(endUserMessage string) *response {
 
 func (r *response) Success() *response {
 	r.Status = true
-	r.Message = SUCCESS
 	return r
 }
 
-func (r *response) Fail(err string) *response {
-	r.Status = true
-	r.Message = SUCCESS
-	r.Error = err
+func (r *response) Fail(respType responseType) *response {
+	r.Status = false
+	r.Type = string(respType)
 	return r
 }
 func (r *response) WithData(data any) *response {
@@ -52,14 +48,14 @@ func CreatedResponse(endUserMessage string) (int, response) {
 	return http.StatusCreated, *Response(endUserMessage).Success()
 }
 
-func ForbittenResponse(endUserMessage string, err string) (int, response) {
-	return http.StatusForbidden, *Response(endUserMessage).Fail(err)
+func ForbittenResponse(endUserMessage string, respType responseType) (int, response) {
+	return http.StatusForbidden, *Response(endUserMessage).Fail(respType)
 }
 
-func BadRequestResponse(endUserMessage string, err string) (int, response) {
-	return http.StatusBadRequest, *Response(endUserMessage).Fail(err)
+func BadRequestResponse(endUserMessage string, respType responseType) (int, response) {
+	return http.StatusBadRequest, *Response(endUserMessage).Fail(respType)
 }
 
-func UnauthorizedResponse(endUserMessage string, err string) (int, response) {
-	return http.StatusUnauthorized, *Response(endUserMessage).Fail(err)
+func UnauthorizedResponse(endUserMessage string, respType responseType) (int, response) {
+	return http.StatusUnauthorized, *Response(endUserMessage).Fail(respType)
 }
