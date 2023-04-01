@@ -22,13 +22,13 @@ func NewServer(conf ServerConfig) *Server {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	server.router = gin.New()
+	server.router.SetTrustedProxies(conf.TrustedProxies)
+
 	if conf.EnablePrometheus {
 		prom := ginprometheus.NewPrometheus("gin")
 		prom.Use(server.router)
 	}
-
-	server.router = gin.New()
-	server.router.SetTrustedProxies(conf.TrustedProxies)
 
 	return server
 }
