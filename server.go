@@ -5,6 +5,7 @@ import (
 
 	r "github.com/cntech-io/gin-be/response"
 	"github.com/gin-gonic/gin"
+	ginprometheus "github.com/zsais/go-gin-prometheus"
 )
 
 type Server struct {
@@ -19,6 +20,11 @@ func NewServer(conf ServerConfig) *Server {
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
+	}
+
+	if conf.EnablePrometheus {
+		prom := ginprometheus.NewPrometheus("gin")
+		prom.Use(server.router)
 	}
 
 	server.router = gin.New()
