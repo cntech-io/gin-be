@@ -3,6 +3,7 @@ module github.com/cntech-io/gin-be
 go 1.20
 
 require (
+	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.9.0
 	github.com/zsais/go-gin-prometheus v0.1.0
 )

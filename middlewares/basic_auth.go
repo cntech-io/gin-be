@@ -10,8 +10,8 @@ func BasicAuthMiddleware() gin.HandlerFunc {
 		username, password, ok := context.Request.BasicAuth()
 		if !ok || username == "" || password == "" {
 			context.JSON(r.BadRequestResponse(
-				"Invalid request",
 				"Provided authentication informations are invalid or have invalid format",
+				r.InvalidParams,
 			))
 			context.Abort()
 		}
