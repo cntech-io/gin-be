@@ -33,7 +33,7 @@ func NewServer(conf ServerConfig) *Server {
 	return server
 }
 
-func (s *Server) AddController(c *controller) *Server {
+func (s *Server) AddController(c *Controller) *Server {
 	if c.path == "" {
 		panic("controller path missing")
 	}
