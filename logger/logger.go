@@ -4,17 +4,17 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type LoggerConfig struct {
+type GinBeLoggerConfig struct {
 	Service   string
 	DebugMode bool
 }
 
-type ginBeLogger struct {
+type GinBeLogger struct {
 	Logger *logrus.Logger
-	Config *LoggerConfig
+	Config *GinBeLoggerConfig
 }
 
-func NewLogger(config *LoggerConfig) *ginBeLogger {
+func NewLogger(config *GinBeLoggerConfig) *GinBeLogger {
 	logger := logrus.New()
 	if config.DebugMode {
 		logger.SetLevel(logrus.DebugLevel)
@@ -22,19 +22,19 @@ func NewLogger(config *LoggerConfig) *ginBeLogger {
 		logger.SetLevel(logrus.ErrorLevel)
 	}
 	logger.SetFormatter(&logrus.JSONFormatter{})
-	return &ginBeLogger{
+	return &GinBeLogger{
 		Logger: logger,
 		Config: config,
 	}
 }
 
-func (gbl *ginBeLogger) Warn(msg string) {
+func (gbl *GinBeLogger) Warn(msg string) {
 	gbl.Logger.WithFields(logrus.Fields{
 		"service": gbl.Config.Service,
 	}).Warn(msg)
 }
 
-func (gbl *ginBeLogger) Info(msg string) {
+func (gbl *GinBeLogger) Info(msg string) {
 	gbl.Logger.WithFields(logrus.Fields{
 		"service": gbl.Config.Service,
 	}).Info(msg)
