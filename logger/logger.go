@@ -39,3 +39,9 @@ func (gbl *GinBeLogger) Info(msg string) {
 		"service": gbl.Config.Service,
 	}).Info(msg)
 }
+
+func (gbl *GinBeLogger) Error(msg string) {
+	gbl.Logger.WithFields(logrus.Fields{
+		"service": gbl.Config.Service,
+	}).Error(msg)
+}
