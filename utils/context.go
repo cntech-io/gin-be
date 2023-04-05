@@ -49,6 +49,16 @@ func GetBearerTokenFromContext(ctx *gin.Context) (string, error) {
 	return token, nil
 }
 
+func GetCustomHeaderValueFromContext(ctx *gin.Context, key string) (string, error) {
+	valueArr, err := getHeader(ctx, key)
+	if err != nil {
+		return "", err
+	}
+	value := valueArr[0]
+
+	return value, nil
+}
+
 func GetPredefinedValueFromContext(ctx *gin.Context, key string) (string, error) {
 	value, ok := ctx.Get(key)
 	if !ok {
