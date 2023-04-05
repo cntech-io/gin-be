@@ -5,7 +5,9 @@ import "net/http"
 type responseType string
 
 const (
-	InvalidParams responseType = "invalid_params"
+	InvalidParams  responseType = "invalid_params"
+	QueryError     responseType = "query_error"
+	AlgorthymError responseType = "algorthym_error"
 )
 
 type response struct {
