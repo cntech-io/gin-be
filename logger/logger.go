@@ -5,8 +5,8 @@ import (
 )
 
 type GinBeLoggerConfig struct {
-	Service   string
-	DebugMode bool
+	Service       string
+	DebugModeFlag bool
 }
 
 type GinBeLogger struct {
@@ -16,7 +16,7 @@ type GinBeLogger struct {
 
 func NewLogger(config *GinBeLoggerConfig) *GinBeLogger {
 	logger := logrus.New()
-	if config.DebugMode {
+	if config.DebugModeFlag {
 		logger.SetLevel(logrus.DebugLevel)
 	} else {
 		logger.SetLevel(logrus.ErrorLevel)

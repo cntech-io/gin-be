@@ -3,15 +3,16 @@ package ginbe
 import (
 	"fmt"
 
+	"github.com/cntech-io/gin-be/constant"
 	"github.com/cntech-io/gin-be/utils"
 	"github.com/joho/godotenv"
 )
 
 type ServerEnv struct {
-	DebugMode        bool
-	Port             string
-	TrustedProxies   []string
-	EnablePrometheus bool
+	DebugModeFlag  bool
+	AppPort        string
+	TrustedProxies []string
+	PrometheusFlag bool
 }
 
 func NewServerEnv() *ServerEnv {
@@ -19,9 +20,9 @@ func NewServerEnv() *ServerEnv {
 		fmt.Println(".env file not found")
 	}
 	return &ServerEnv{
-		DebugMode:        utils.GetBooleanEnv("DEBUG_MODE", false),
-		Port:             utils.GetStringEnv("PORT", false),
-		TrustedProxies:   utils.GetStringArrayEnv("TRUSTED_PROXIES", ",", false),
-		EnablePrometheus: utils.GetBooleanEnv("PROMETHEUS_FLAG", false),
+		DebugModeFlag:  utils.GetBooleanEnv(constant.DEBUG_MODE_FLAG, false),
+		AppPort:        utils.GetStringEnv(constant.APP_PORT, false),
+		TrustedProxies: utils.GetStringArrayEnv(constant.TRUSTED_PROXIES, ",", false),
+		PrometheusFlag: utils.GetBooleanEnv(constant.PROMETHEUS_FLAG, false),
 	}
 }

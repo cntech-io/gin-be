@@ -16,7 +16,7 @@ type Server struct {
 func NewServer(conf ServerConfig) *Server {
 	server := &Server{}
 	server.config = &conf
-	if conf.DebugMode {
+	if conf.DebugModeFlag {
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
@@ -25,7 +25,7 @@ func NewServer(conf ServerConfig) *Server {
 	server.router = gin.New()
 	server.router.SetTrustedProxies(conf.TrustedProxies)
 
-	if conf.EnablePrometheus {
+	if conf.PrometheusFlag {
 		prom := ginprometheus.NewPrometheus("gin")
 		prom.Use(server.router)
 	}
@@ -61,9 +61,9 @@ func (s *Server) AttachHealth() *Server {
 }
 
 func (s *Server) Run() {
-	if s.config.Port == "" {
+	if s.config.AppPort == "" {
 		s.router.Run(":8080")
 	} else {
-		s.router.Run(s.config.Port)
+		s.router.Run(s.config.AppPort)
 	}
 }

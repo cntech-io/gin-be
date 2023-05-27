@@ -1,6 +1,8 @@
 package env
 
 import (
+	"github.com/cntech-io/gin-be/constant"
+
 	"github.com/cntech-io/gin-be/utils"
 )
 
@@ -12,8 +14,8 @@ type RedisDBEnv struct {
 
 func NewRedisDBEnv() *RedisDBEnv {
 	return &RedisDBEnv{
-		Host:     utils.GetStringEnv("REDISDB_HOST", false),
-		Port:     utils.GetStringEnv("REDISDB_PORT", false),
-		Password: utils.GetStringEnv("REDISDB_PASSWORD", false),
+		Host:     utils.GetStringEnv(constant.REDISDB_HOST, false),
+		Port:     utils.GetStringEnv(constant.REDISDB_PORT, false),
+		Password: utils.GetStringEnv(constant.REDISDB_PASSWORD, false),
 	}
 }

@@ -12,26 +12,26 @@ const (
 	DELETE RouteMethod = "DELETE"
 )
 
-type api struct {
+type resource struct {
 	path        string
 	method      RouteMethod
 	handler     gin.HandlerFunc
 	middlewares []gin.HandlerFunc
 }
 
-func NewAPI(method RouteMethod, path string) *api {
-	return &api{
+func NewResource(method RouteMethod, path string) *resource {
+	return &resource{
 		path:   path,
 		method: method,
 	}
 }
 
-func (a *api) Handler(h gin.HandlerFunc) *api {
+func (a *resource) Handler(h gin.HandlerFunc) *resource {
 	a.handler = h
 	return a
 }
 
-func (a *api) AddMiddleware(m gin.HandlerFunc) *api {
+func (a *resource) AddMiddleware(m gin.HandlerFunc) *resource {
 	a.middlewares = append(a.middlewares, m)
 	return a
 }
