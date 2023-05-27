@@ -41,8 +41,8 @@ func (s *Server) AddController(c *Controller) *Server {
 		panic("controller version missing")
 	}
 	group := s.router.Group(fmt.Sprintf("%v%v", c.version, c.path))
-	for _, api := range c.apis {
-		group.Handle(string(api.method), api.path, append(api.middlewares, api.handler)...)
+	for _, resource := range c.resources {
+		group.Handle(string(resource.method), resource.path, append(resource.middlewares, resource.handler)...)
 	}
 	return s
 }

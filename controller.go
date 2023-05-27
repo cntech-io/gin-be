@@ -1,9 +1,9 @@
 package ginbe
 
 type Controller struct {
-	version string
-	path    string
-	apis    []resource
+	version   string
+	path      string
+	resources []resource
 }
 
 func NewController(version string, path string) *Controller {
@@ -13,7 +13,7 @@ func NewController(version string, path string) *Controller {
 	}
 }
 
-func (c *Controller) AttachAPI(a *resource) *Controller {
-	c.apis = append(c.apis, *a)
+func (c *Controller) AttachResource(a *resource) *Controller {
+	c.resources = append(c.resources, *a)
 	return c
 }
