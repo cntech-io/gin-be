@@ -67,3 +67,7 @@ func (s *Server) Run() {
 		s.router.Run(s.config.AppPort)
 	}
 }
+
+func (s *Server) Router() *gin.Engine {
+	return s.router
+}
