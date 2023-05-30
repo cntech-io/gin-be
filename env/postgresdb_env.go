@@ -11,6 +11,7 @@ type PostgresDBEnv struct {
 	Port          string
 	Username      string
 	Password      string
+	Database      string
 	MigrationFlag bool
 }
 
@@ -18,6 +19,7 @@ func NewPostgressDBEnv() *PostgresDBEnv {
 	return &PostgresDBEnv{
 		Host:          utils.GetStringEnv(constant.POSTGRESDB_HOST, false),
 		Port:          utils.GetStringEnv(constant.POSTGRESDB_PORT, false),
+		Database:      utils.GetStringEnv(constant.POSTGRESDB_DATABASE, false),
 		Username:      utils.GetStringEnv(constant.POSTGRESDB_USERNAME, false),
 		Password:      utils.GetStringEnv(constant.POSTGRESDB_PASSWORD, false),
 		MigrationFlag: utils.GetBooleanEnv(constant.POSTGRESDB_MIGRATION_FLAG, false),
