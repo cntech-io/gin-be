@@ -48,7 +48,7 @@ func (s *Server) AddController(c *Controller) *Server {
 }
 
 func (s *Server) AttachMiddleWare(middleware gin.HandlerFunc) *Server {
-	s.router.Use((middleware))
+	s.router.Use(middleware)
 	return s
 }
 
