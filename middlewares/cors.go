@@ -7,12 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CORSMiddleware(config *cors.Config) gin.HandlerFunc {
-	if config == nil {
-		fmt.Println("default cors config applied")
-		return cors.Default()
-	} else {
-		fmt.Println("new cors config applied")
-		return cors.New(*config)
-	}
+func CORSMiddleware(config cors.Config) gin.HandlerFunc {
+	fmt.Println("new cors config applied")
+	return cors.New(config)
 }
