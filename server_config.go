@@ -7,5 +7,5 @@ type ServerConfig struct {
 	DebugModeFlag  bool
 	TrustedProxies []string
 	PrometheusFlag bool
-	CorsConfig     cors.Config
+	CorsConfig     *cors.Config
 }
