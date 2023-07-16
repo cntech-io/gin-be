@@ -8,6 +8,6 @@ import (
 )
 
 func CORSMiddleware(config cors.Config) gin.HandlerFunc {
-	fmt.Println("new cors config applied")
+	fmt.Println("new cors config applied\n", config)
 	return cors.New(config)
 }
