@@ -19,7 +19,7 @@ func NewLogger(config *GinBeLoggerConfig) *GinBeLogger {
 	if config.DebugModeFlag {
 		logger.SetLevel(logrus.DebugLevel)
 	} else {
-		logger.SetLevel(logrus.ErrorLevel)
+		logger.SetLevel(logrus.WarnLevel)
 	}
 	logger.SetFormatter(&logrus.JSONFormatter{})
 	return &GinBeLogger{
